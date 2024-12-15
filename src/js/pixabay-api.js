@@ -1,3 +1,4 @@
+import axios from 'axios';
 import iziToast from "izitoast";// Додатковий імпорт стилів
 import "izitoast/dist/css/iziToast.min.css";
 import SimpleLightbox from "simplelightbox";
@@ -15,15 +16,30 @@ button.addEventListener("click", (evt)=>{
     evt.preventDefault();
 
     load.classList.remove('hidden');
-    const options = {
-        key: '34921849-da8a609ca2d9d5a3e9034ffad',
-        q: input.value.trim(),
-        image_type: 'photo',
-        orientation: 'horizontal',
-        safesearch: 'true',
-    }
-    const params = new URLSearchParams(options).toString();
-    fetch(`https://pixabay.com/api/?${params}`) 
+    const fetchGallery = async () => {
+        const response = await 
+        axios.get(`ttps://pixabay.com/api?${options}`, {
+            key: '34921849-da8a609ca2d9d5a3e9034ffad',
+            q: input.value.trim(),
+            image_type: 'photo',
+            orientation: 'horizontal',
+            safesearch: 'true',
+            page: 1,
+            per_page: 15,
+        });
+        return response.data;
+    };
+
+    // const options = {
+    //     key: '34921849-da8a609ca2d9d5a3e9034ffad',
+    //     q: input.value.trim(),
+    //     image_type: 'photo',
+    //     orientation: 'horizontal',
+    //     safesearch: 'true',
+    // // }
+    // const params = new URLSearchParams(options).toString();
+    // fetch(`https://pixabay.com/api/?${params}`) 
+    fetchGallery()
         .then((response) => {
             if (!response.ok) {
                 throw new Error(response.status);
