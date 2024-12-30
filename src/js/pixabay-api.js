@@ -18,9 +18,10 @@ const lightbox = new SimpleLightbox('.gallery a', {
 
 // Створення галереї за кліком
 
-let page = 1; 
-let totalHits = 0; 
+let page = 1; // поточна сторінка
+let totalHits = 0; // скільки знайдених зображень
 
+//обробка кнопки при кліку
 button.addEventListener("click", async (evt) => {
     evt.preventDefault();
     page = 1; 
@@ -30,7 +31,7 @@ button.addEventListener("click", async (evt) => {
     try {
         const photos = await fetchGallery();
         totalHits = photos.totalHits;
-
+        // не знайдено зображення
         if (photos.hits.length === 0) {
             iziToast.error({
                 message: "Sorry, there are no images matching your search query. Please try again!",
@@ -43,7 +44,8 @@ button.addEventListener("click", async (evt) => {
 
         renderGallery(photos.hits);
         btnMore.classList.remove('hidden');
-    } catch (error) {
+    }   // Обробка помилок 
+        catch (error) {
         iziToast.error({
             message: `Error: ${error.message}`,
             position: 'topRight',
@@ -59,6 +61,7 @@ button.addEventListener("click", async (evt) => {
 
 btnMore.addEventListener("click", async () => {
     if (page >= Math.ceil(totalHits / 15)) {
+        // коли закінчились всі фото
         iziToast.error({
             message: "We're sorry, but you've reached the end of search results.",
             position: "topRight",
@@ -67,6 +70,7 @@ btnMore.addEventListener("click", async () => {
         return;
     }
 
+    // нові сторінки із зображеннями
     page += 1;
     load.classList.remove('hidden');
     try {
@@ -87,6 +91,16 @@ btnMore.addEventListener("click", async () => {
 // Функція запиту до Pixabay
 
 const fetchGallery = async () => {
+    // чи порожній запит
+    if (input.value.trim() === '') {
+        iziToast.error({
+            message: "Please enter a search query!",
+            position: "topRight",
+            timeout: 3000,
+        });
+        throw new Error("Search query is empty.");
+    }
+
     try {
     const response = await axios.get('https://pixabay.com/api/', {
         params: {
@@ -107,6 +121,7 @@ const fetchGallery = async () => {
         position: "topRight",
         timeout: 3000,
     });
+    throw error;
 }};
 
 // Функція створення галереї
