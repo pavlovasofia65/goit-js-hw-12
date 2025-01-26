@@ -1,0 +1,114 @@
+body {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    width: 1128px;
+    }
+    
+    .form {
+        display: flex;
+        align-content: center;
+        justify-content: center;
+    }
+    
+    .input {
+        border: 1px solid #808080;
+    border-radius: 4px;
+    width: 272px;
+    height: 24px;
+    padding: 8px 16px;
+    }
+    
+    .input:hover {
+        border: 1px solid #000;
+    }
+    
+    .input:active {
+        border: 1px solid #4e75ff;
+    }
+    
+    .input::placeholder {
+        color: #808080;
+        font-size: 16px;
+    }
+    
+    button {
+        border-radius: 8px;
+    padding: 8px 16px;
+    width: 91px;
+    height: 40px;
+    background: #4e75ff;
+    border: none;
+    margin-left: 8px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 16px;
+    }
+
+.btn {
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    .btn-more {
+        justify-content: center;
+        align-items: center;
+        margin-top: 32px;
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+        width: 125px;
+    }
+    
+    button:hover {
+        background: #6c8cff;
+    }
+    
+    .load {
+        color: #2e2f42;
+        margin-top: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .hidden {
+        display: none;
+    }
+    
+    .gallery {
+        display: flex;
+        margin-top: 32px;
+        gap: 24px;
+        flex-wrap: wrap;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .info-item {
+    font-size: 12px;
+    line-height: 1.33333;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    
+    }
+    
+    .card {
+        display: flex;
+        gap: 28px;
+        padding-left: 20px;
+        padding-right: 20px;
+        width: 360px;
+    }
+    
+    
+    a {
+        display: inline-block;
+        width: auto;
+    }
