@@ -36,6 +36,7 @@ const onSearchFormSubmit = async evt => {
 
         page = 1;
         btnMore.classList.add('hidden');
+        load.classList.remove('hidden');
 
         const { data } = await fetchPhotos(query, page);
 
@@ -60,6 +61,7 @@ const onSearchFormSubmit = async evt => {
         const markup = data.hits.map(photo => createPhotoCard(photo) ).join("");
         gallery.innerHTML = markup;
         lightbox.refresh();
+        load.classList.add('hidden');
 
         const firstCard = document.querySelector('.gallery .item'); 
         if (firstCard) {
@@ -77,12 +79,23 @@ const onSearchFormSubmit = async evt => {
 
 const onBtnMoreClick = async evt => {
     try {
+        load.classList.remove('hidden');
         page++;
         const { data } = await fetchPhotos(query, page);
 
         const markup = data.hits.map(photo => createPhotoCard(photo) ).join("");
         gallery.insertAdjacentHTML('beforeend', markup);
         lightbox.refresh();
+        load.classList.add('hidden');
+
+        const firstCard = document.querySelector('.gallery .item'); 
+        if (firstCard) {
+            const cardHeight = firstCard.getBoundingClientRect().height;
+            window.scrollBy({
+                top: cardHeight,
+                behavior: 'smooth', 
+            });
+        }
 
         if (page === totalPages) {
             btnMore.classList.add('hidden');
